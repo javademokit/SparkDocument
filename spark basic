@@ -1,0 +1,275 @@
+ Data scientist Author: Shyam Yadav
+Course Basic data Frame with PySpark 
+ Duration: 60 minutes 
+Data science: Data science is an inter-disciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and insights from many structural and unstructured data. Data science is related to data mining, machine learning and big data.
+Introduction:
+Py Spark is a Spark library written in Python to run Python application using Apache Spark capabilities, using Py Spark we can run applications parallelly on the distributed cluster (multiple nodes).
+In other words, PySpark is a Python API for Apache Spark. Apache Spark is an analytical processing engine for large scale powerful distributed data processing and machine learning applications.
+Spark basically written in Scala and later on due to its industry adaptation it’s API PySpark released for Python using Py4J. Py4J is a Java library that is integrated within PySpark and allows python to dynamically interface with JVM objects, hence to run PySpark you also need Java to be installed along with Python, and Apache Spark.
+Additionally, For the development, you can use Anaconda distribution (widely used in the Machine Learning community) which comes with a lot of useful tools like Spyder IDE, Jupyter notebook to run PySpark applications.
+In real-time, PySpark has used a lot in the machine learning & Data scientists community; thanks to vast python machine learning libraries. Spark runs operations on billions and trillions of data on distributed clusters 100 times faster than the traditional python applications.
+
+What Are Data Frames?
+In Spark, a Data Frame is a distributed collection of data organized into named columns. It is conceptually equivalent to a table in a relational database or a data frame in R/Python, but with richer optimizations under the hood. Data Frames can be constructed from a wide array of sources such as: structured data files, tables in Hive, external databases, or existing RDDs.
+The following example shows how to construct Data Frames in Python. A similar API is available in Scala and Java.
+Who uses PySpark?
+PySpark is very well used in Data Science and Machine Learning community as there are many widely used data science libraries written in Python including NumPy, TensorFlow also used due to its efficient processing of large datasets. PySpark has been used by many organizations like Walmart, Trivago, Sanofi, Runtastic, and many more.
+Features:
+Following are the main features of PySpark.
+ 
+In-memory computation
+Distributed processing using parallelize
+Can be used with many cluster managers (Spark, Yarn, Mesos e.t.c)
+Fault-tolerant
+Immutable
+Lazy evaluation
+Cache & persistence
+Inbuild-optimization when using DataFrames
+Supports ANSI SQL
+PySpark Architecture:
+Apache Spark works in a master-slave architecture where the master is called “Driver” and slaves are called “Workers”. When you run a Spark application, Spark Driver creates a context that is an entry point to your application, and all operations (transformations and actions) are executed on worker nodes, and the resources are managed by Cluster Manager.
+ 
+Cluster Manager Types:
+As of writing this Spark with Python (PySpark) tutorial, Spark supports below cluster managers:
+Standalone – a simple cluster manager included with Spark that makes it easy to set up a cluster.
+Apache Mesos – Mesons is a Cluster manager that can also run Hadoop MapReduce and PySpark applications.
+Hadoop YARN – the resource manager in Hadoop 2. This is mostly used, cluster manager.
+Kubernetes – an open-source system for automating deployment, scaling, and management of containerized applications.
+local – which is not really a cluster manager but still I wanted to mention as we use “local” for master() in order to run Spark on your laptop/computer.
+PySpark Modules & Packages:
+ 
+PySpark RDD (pyspark.RDD)
+PySpark DataFrame and SQL (pyspark.sql)
+PySpark Streaming (pyspark.streaming)
+PySpark MLib (pyspark.ml, pyspark.mllib)
+PySpark GraphFrames (GraphFrames)
+PySpark Resource (pyspark.resource) It’s new in PySpark 3.0
+ 
+Besides these, if you wanted to use third-party libraries, you can find them at https://spark-packages.org/ . This page is kind of a repository of all Spark third-party libraries.
+PySpark Installation:
+In order to run PySpark examples mentioned in this tutorial, you need to have Python, Spark and it’s needed tools to be installed on your computer. Since most developers use Windows for development, I will explain how to install PySpark on windows.
+Install Python or Anaconda distribution:
+Download and install either Python from Python.org or Anaconda distribution which includes Python, Spyder IDE, and Jupyter notebook. I would recommend using Anaconda as it’s popular and used by the Machine Learning & Data science community.
+Install Java 8
+To run PySpark application, you would need Java 8 or later version hence download the Java version from Oracle and install it on your system.
+
+Post installation, set JAVA_HOME and PATH variable.
+ 
+Install Apache Spark
+Download Apache spark by accessing Spark Download page and select the link from “Download Spark (point 3)”. If you wanted to use a different version of Spark & Hadoop, select the one you wanted from drop downs and the link on point 3 changes to the selected version and provides you with an updated link to download.
+ 
+After download, untar the binary using 7zip and copy the underlying folder spark-3.0.0-bin-hadoop2.7 to c:\apps
+Now set the following environment variables.
+ 
+Setup winutils.exe
+Download wunutils.exe file from winutils, and copy it to %SPARK_HOME%\bin folder. Winutils are different for each Hadoop version hence download the right version from https://github.com/steveloughran/winutils
+PySpark shell:
+Now open command prompt and type pyspark command to run PySpark shell. You should see something like below.
+ 
+Spark-shell also creates a Spark context web UI and by default, it can access from http://localhost:4041.
+Spark Web UI
+Apache Spark provides a suite of Web UIs (Jobs, Stages, Tasks, Storage, Environment, Executors, and SQL) to monitor the status of your Spark application, resource consumption of Spark cluster, and Spark configurations. On Spark Web UI, you can see how the operations are executed.
+ 
+Spark History Server:
+Spark History servers, keep a log of all Spark application you submit by spark-submit, spark-shell. before you start, first you need to set the below config on spark-defaults.conf
+spark.eventLog.enabled true
+spark.history.fs.logDirectory file:///c:/logs/path
+Now, start spark history server on Linux or mac by running.
+$SPARK_HOME/sbin/start-history-server.s
+If you are running Spark on windows, you can start the history server by starting the below command.
+$SPARK_HOME/bin/spark-class.cmd org.apache.spark.deploy.history.HistoryServer
+ 
+By clicking on each App ID, you will get the details of the application in PySpark web UI.
+Spyder IDE & Jupyter Notebook
+To write PySpark applications, you would need an IDE, there are 10’s of IDE to work with and I choose to use Spyder IDE and Jupyter notebook. If you have not installed Spyder IDE and Jupyter notebook along with Anaconda distribution, install these before you proceed.
+Now, set the following environment variable.
+PYTHONPATH => %SPARK_HOME%/python;$SPARK_HOME/python/lib/py4j-0.10.9-src.zip;%PYTHONPATH%
+Now open Spyder IDE and create a new file with below simple PySpark program and run it. You should see 5 in output.
+ 
+Now let’s start the Jupyter Notebook
+ 
+PySpark RDD – Resilient Distributed Dataset:
+In this section of the PySpark tutorial, I will introduce the RDD and explains how to create them and use its transformation and action operations with examples. Here is the full article on PySpark RDD in case if you wanted to learn more of and get your fundamentals strong.
+PySpark RDD (Resilient Distributed Dataset) is a fundamental data structure of PySpark that is fault-tolerant, immutable distributed collections of objects, which means once you create an RDD you cannot change it. Each dataset in RDD is divided into logical partitions, which can be computed on different nodes of the cluster.
+RDD Creation 
+In order to create an RDD, first, you need to create a SparkSession which is an entry point to the PySpark application. SparkSession can be created using a builder() or newSession() methods of the SparkSession.
+Spark session internally creates a sparkContext variable of SparkContext. You can create multiple SparkSession objects but only one SparkContext per JVM. In case if you want to create another new SparkContext you should stop existing Sparkcontext (using stop()) before creating a new one.
+
+spark = SparkSession.builder()
+      .master("local[1]")
+      .appName("SparkByExamples.com")
+      .getOrCreate()  
+using parallelize()
+SparkContext has several functions to use with RDDs. For example, it’s parallelize() method is used to create an RDD from a list.
+
+#Create RDD from parallelize    
+dataList = [("Java", 20000), ("Python", 100000), ("Scala", 3000)]
+rdd=spark.sparkContext.parallelize(dataList)
+using textFile()
+RDD can also be created from a text file using textFile() function of the SparkContext.
+
+//Create RDD from external Data source
+rdd2 = spark.sparkContext.textFile("/path/textFile.txt")
+Once you have an RDD, you can perform transformation and action operations. Any operation you perform on RDD runs in parallel.
+RDD Operations
+On PySpark RDD, you can perform two kinds of operations.
+RDD transformations – Transformations are lazy operations. When you run a transformation(for example update), instead of updating a current RDD, these operations return another RDD.
+RDD actions – operations that trigger computation and return RDD values to the driver.
+RDD Transformations
+Transformations on Spark RDD returns another RDD and transformations are lazy meaning they don’t execute until you call an action on RDD. Some transformations on RDD’s are flatMap(), map(), reduceByKey(), filter(), sortByKey() and return new RDD instead of updating the current.
+RDD Actions
+RDD Action operation returns the values from an RDD to a driver node. In other words, any RDD function that returns non RDD[T] is considered as an action. 
+Some actions on RDD’s are count(), collect(), first(), max(), reduce() and more.
+PySpark DataFrame
+DataFrame definition is very well explained by Databricks hence I do not want to define it again and confuse you. Below is the definition I took it from Databricks.
+DataFrame is a distributed collection of data organized into named columns. It is conceptually equivalent to a table in a relational database or a data frame in R/Python, but with richer optimizations under the hood. DataFrames can be constructed from a wide array of sources such as structured data files, tables in Hive, external databases, or existing RDDs.
+– Databricks
+If you are coming from a Python background I would assume you already know what Pandas DataFrame is; PySpark DataFrame is mostly similar to Pandas DataFrame with exception PySpark DataFrames are distributed in the cluster (meaning the data in DataFrame’s are stored in different machines in a cluster) and any operations in PySpark executes in parallel on all machines whereas Panda Dataframe stores and operates on a single machine.
+If you have no Python background, I would recommend you learn some basics on Python before you proceeding this Spark tutorial. For now, just know that data in PySpark DataFrame’s are stored in different machines in a cluster.
+Is PySpark faster than pandas?
+Due to parallel execution on all cores on multiple machines, Pyspark runs operations faster then Pandas. In other words, pandas run operations on a single node whereas PySpark runs on multiple machines.
+DataFrame creation
+Simplest way to create an DataFrame is from a Python list of data. DataFrame can also be created from an RDD and by reading a files from several sources.
+using createDataFrame()
+By using createDataFrame() function of the SparkSession you can create a DataFrame.
+
+data = [('James','','Smith','1991-04-01','M',3000),
+  ('Michael','Rose','','2000-05-19','M',4000),
+  ('Robert','','Williams','1978-09-05','M',4000),
+  ('Maria','Anne','Jones','1967-12-01','F',4000),
+  ('Jen','Mary','Brown','1980-02-17','F',-1)
+]
+
+columns = ["firstname","middlename","lastname","dob","gender","salary"]
+df = spark.createDataFrame(data=data, schema = columns)
+Since DataFrame’s are structure format which contains names and column, we can get the schema of the DataFrame using df.printSchema()
+
+data = [('James','','Smith','1991-04-01','M',3000),
+  ('Michael','Rose','','2000-05-19','M',4000),
+  ('Robert','','Williams','1978-09-05','M',4000),
+  ('Maria','Anne','Jones','1967-12-01','F',4000),
+  ('Jen','Mary','Brown','1980-02-17','F',-1)
+]
+
+columns = ["firstname","middlename","lastname","dob","gender","salary"]
+df = spark.createDataFrame(data=data, schema = columns)
+df.show() shows the 20 elements from the DataFrame.
+
++---------+----------+--------+----------+------+------+
+|firstname|middlename|lastname|dob       |gender|salary|
++---------+----------+--------+----------+------+------+
+|James    |          |Smith   |1991-04-01|M     |3000  |
+|Michael  |Rose      |        |2000-05-19|M     |4000  |
+|Robert   |          |Williams|1978-09-05|M     |4000  |
+|Maria    |Anne      |Jones   |1967-12-01|F     |4000  |
+|Jen      |Mary      |Brown   |1980-02-17|F     |-1    |
++---------+----------+--------+----------+------+------+
+DataFrame operations
+Like RDD, DataFrame also has operations like Transformations and Actions.
+DataFrame from external data sources
+In realtime applications, DataFrame’s are created from external sources like files from the local system, HDFS, S3 Azure, HBase, MySQL table e.t.c. Below is an example of how to read a csv file from a local system.
+
+df = spark.read.csv("/tmp/resources/zipcodes.csv")
+df.printSchema()
+Supported file formats
+DataFrame has a rich set of API which supports reading and writing several file formats
+•	csv
+•	text
+•	Avro
+•	Parquet
+•	tsv
+•	xml and many more
+DataFrame Examples
+In this section of the PySpark Tutorial, you will find several Spark examples written in Python that help in your projects.
+•	Different ways to Create DataFrame in PySpark
+•	PySpark – Ways to Rename column on DataFrame
+•	PySpark withColumn() usage with Examples
+•	PySpark – How to Filter data from DataFrame
+•	PySpark orderBy() and sort() explained
+•	PySpark explode array and map columns to rows
+•	PySpark – explode nested array into rows
+•	PySpark Read CSV file into DataFrame
+•	PySpark Groupby Explained with Examples
+•	PySpark Aggregate Functions with Examples
+•	PySpark Joins Explained with Examples
+PySpark SQL Tutorial
+PySpark SQL is one of the most used PySpark modules which is used for processing structured columnar data format. Once you have a DataFrame created, you can interact with the data by using SQL syntax.
+In other words, Spark SQL brings native RAW SQL queries on Spark meaning you can run traditional ANSI SQL’s on Spark Dataframe, in the later section of this PySpark SQL tutorial, you will learn in details using SQL select, where, group by, join, union e.t.c
+In order to use SQL, first, create a temporary table on DataFrame using createOrReplaceTempView() function. Once created, this table can be accessed throughout the SparkSession using sql() and it will be dropped along with your SparkContext termination.
+Use sql() method of the SparkSession object to run the query and this method returns a new DataFrame.
+
+df.createOrReplaceTempView("PERSON_DATA")
+df2 = spark.sql("SELECT * from PERSON_DATA")
+df2.printSchema()
+df2.show()
+Let’s see another pyspark example using group by.
+
+groupDF = spark.sql("SELECT gender, count(*) from PERSON_DATA group by gender")
+groupDF.show()
+This yields the below output
+
++------+--------+
+|gender|count(1)|
++------+--------+
+|     F|       2|
+|     M|       3|
++------+--------+
+Similarly you can run any traditional SQL queries on DataFrame’s using PySpark SQL.
+PySpark Streaming Tutorial
+PySpark Streaming is a scalable, high-throughput, fault-tolerant streaming processing system that supports both batch and streaming workloads. It is used to process real-time data from sources like file system folder, TCP socket, S3, Kafka, Flume, Twitter, and Amazon Kinesis to name a few. The processed data can be pushed to databases, Kafka, live dashboards e.t.c
+ source: https://spark.apache.org/
+Streaming from TCP Socket
+Use readStream.format("socket") from Spark session object to read data from the socket and provide options host and port where you want to stream data from.
+
+df = spark.readStream
+      .format("socket")
+      .option("host","localhost")
+      .option("port","9090")
+      .load()
+Spark reads the data from socket and represents it in a “value” column of DataFrame. df.printSchema() outputs
+
+root
+ |-- value: string (nullable = true)
+After processing, you can stream the DataFrame to console. In real-time, we ideally stream it to either Kafka, database e.t.c
+
+query = count.writeStream
+      .format("console")
+      .outputMode("complete")
+      .start()
+      .awaitTermination()
+Streaming from Kafka
+Using Spark Streaming we can read from Kafka topic and write to Kafka topic in TEXT, CSV, AVRO and JSON formats
+ 
+
+df = spark.readStream
+        .format("kafka")
+        .option("kafka.bootstrap.servers", "192.168.1.100:9092")
+        .option("subscribe", "json_topic")
+        .option("startingOffsets", "earliest") // From starting
+        .load()
+Below pyspark example, writes message to another topic in Kafka using writeStream()
+
+df.selectExpr("CAST(id AS STRING) AS key", "to_json(struct(*)) AS value")
+   .writeStream
+   .format("kafka")
+   .outputMode("append")
+   .option("kafka.bootstrap.servers", "192.168.1.100:9092")
+   .option("topic", "josn_data_topic")
+   .start()
+   .awaitTermination()
+PySpark MLlib
+In this section, I will cover pyspark examples by using MLlib library.
+PySpark GraphFrames
+PySpark GraphFrames are introduced in Spark 3.0 version to support Graphs on DataFrame’s. Prior to 3.0, Spark has GraphX library which ideally runs on RDD and loses all Data Frame capabilities.
+GraphFrames is a package for Apache Spark which provides DataFrame-based Graphs. It provides high-level APIs in Scala, Java, and Python. It aims to provide both the functionality of GraphX and extended functionality taking advantage of Spark DataFrames. This extended functionality includes motif finding, DataFrame-based serialization, and highly expressive graph queries.
+– GRAPHFRAMES.GITHUB.IO
+
+
+
+
+
+
+
+
+
+
